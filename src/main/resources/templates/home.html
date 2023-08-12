@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+    .container {
+      background-color: blue;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      display: flex;
+      justify-content: center;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    input, button {
+      margin: 5px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+    }
+    button {
+      background-color: #333;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+<h1>Final Exam Set C</h1>
+
+<h1>Category Sales Summary Table</h1>
+
+<div>
+  <table class="table table-bordered table-dark">
+  <thead>
+  <tr>
+    <th>Category Code</th>
+    <th>Category Description</th>
+    <th>Total Sales</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="category : ${categories}">
+    <td th:text="${categories.catcode}"></td>
+    <td th:text="${categories.catdesc}"></td>
+    <td th:text="${categories.totalSales}"></td>
+  </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="container mt-4">
+  <form>
+    <div class="form-group">
+      <label for="receiptNumber">Receipt No</label>
+      <input type="text" class="form-control" id="receiptNumber" name="receiptNumber">
+    </div>
+    <div class="form-group">
+      <label >Item Type</label>
+
+    </div>
+    <div class="form-group">
+
+
+      <select class="form-control" id="itemSelect" name="itemSelect">
+        <option th:each="item : ${itemList}"
+                th:value="${item.icode}"
+                th:text="${item.icode + ' - ' + item.idesc}"></option>
+
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="quantity">Quantity</label>
+      <input type="text" class="form-control" id="quantity" name="quantity">
+    </div>
+    <div class="form-group">
+      <label for="date">Date</label>
+      <input type="date" class="form-control" id="date" name="date">
+    </div>
+    <button type="submit" class="btn btn-primary" th:href="@{/save}" >Save</button>
+  </form>
+</div>
+
+
+
+  </div>
+
+
+
+  <hr>
+
+
+  <table class="table">
+    <thead>
+    <tr>
+
+      <th>Receipt No</th>
+      <th>Item Code</th>
+      <th>Quantity</th>
+      <th>Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="sale : ${salesList}">
+      <td th:text="${sale.recno}"></td>
+      <td th:text="${sale.icode}"></td>
+      <td th:text="${sale.qty}"></td>
+      <td th:text="${sale.dot}"></td>
+    </tr>
+
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+
+
+
+</body>
+</html>
