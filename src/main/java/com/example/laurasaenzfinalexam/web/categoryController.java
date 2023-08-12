@@ -29,11 +29,12 @@ public class categoryController {
     @Autowired
     private salesRepository saleRepository;
 
-    @GetMapping("/home")
+    @GetMapping("/")
     public String showHome(Model model) {
         List<items> itemList = itemRepository.findAll();
         model.addAttribute("itemList", itemList);
-
+        List<sales> salesList = saleRepository.findAll();
+        model.addAttribute("salesList", salesList);
         return "home";
     }
 
@@ -52,6 +53,7 @@ public class categoryController {
         sale.setDot(dot);
 
         saleRepository.save(sale);
+
         List<sales> salesList = saleRepository.findAll();
         Map<String, Double> totalSalesMap = calculateTotalSalesByCategory(catcode);
 
@@ -60,7 +62,7 @@ public class categoryController {
         model.addAttribute("categories", categories);
         model.addAttribute("totalSalesMap", totalSalesMap);
         model.addAttribute("salesList", salesList);
-        return "redirect:/home";
+        return "redirect:/";
 
     }
 
